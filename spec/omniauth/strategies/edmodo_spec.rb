@@ -60,4 +60,69 @@ describe OmniAuth::Strategies::Edmodo do
       expect(subject.raw_info).to eq(parsed_response)
     end
   end
+
+  context '#info' do
+    before do
+      allow(access_token).to receive(:get).with('users/me').and_return(response)
+    end
+
+    context 'when user signing in is a student' do
+      let(:parsed_response) do
+        { 'url' => 'https://api.edmodo.com/users/123', 'id' => 123, 'type' => 'student' }
+      end
+
+      it 'should return empty profile' do
+        expect(subject.info).to eq({
+          'nickname' => nil,
+          'email' => nil,
+          'first_name' => nil,
+          'last_name' => nil,
+          'image' => nil
+        })
+      end
+    end
+
+    context 'when user signing in is a teacher' do
+      let(:parsed_response) do
+        {
+          'url' => 'https://api.edmodo.com/users/123',
+          'id' => 123,
+          'type' => 'teacher',
+          'username' => 'jeff',
+          'email' => 'jeff@example.org',
+          'first_name' => 'Jeff',
+          'last_name' => 'Jefferson',
+          'avatars' => { 'large' => 'https://u.ph.edim.co/123/123.png' }
+        }
+      end
+
+      it 'should return profile with nickname, email, first_name, last_name and image' do
+        expect(subject.info).to eq({
+          'nickname' => 'jeff',
+          'email' => 'jeff@example.org',
+          'first_name' => 'Jeff',
+          'last_name' => 'Jefferson',
+          'image' => 'https://u.ph.edim.co/123/123.png'
+        })
+      end
+
+      context 'without an avatar' do
+        let(:parsed_response) do
+          {
+           'url' => 'https://api.edmodo.com/users/123',
+           'id' => 123,
+           'type' => 'teacher',
+           'username' => 'jeff',
+           'email' => 'jeff@example.org',
+           'first_name' => 'Jeff',
+           'last_name' => 'Jefferson'
+          }
+        end
+
+        it 'should include empty "image" property' do
+          expect(subject.info).to include({ 'image' => nil })
+        end
+      end
+    end
+  end
 end

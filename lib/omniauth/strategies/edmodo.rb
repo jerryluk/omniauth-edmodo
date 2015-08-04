@@ -31,7 +31,7 @@ module OmniAuth
           'email' => raw_info['email'],
           'first_name' => raw_info['first_name'],
           'last_name' => raw_info['last_name'],
-          'image' => raw_info['avatars']['large']
+          'image' => raw_info.fetch('avatars', {})['large']
         }
       end
 
