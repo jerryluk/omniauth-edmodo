@@ -88,20 +88,20 @@ describe OmniAuth::Strategies::Edmodo do
           'url' => 'https://api.edmodo.com/users/123',
           'id' => 123,
           'type' => 'teacher',
-          'username' => 'jeff',
-          'email' => 'jeff@example.org',
-          'first_name' => 'Jeff',
-          'last_name' => 'Jefferson',
+          'username' => 'name_here',
+          'email' => 'name_here@example.org',
+          'first_name' => 'FirstName',
+          'last_name' => 'LastName',
           'avatars' => { 'large' => 'https://u.ph.edim.co/123/123.png' }
         }
       end
 
       it 'should return profile with nickname, email, first_name, last_name and image' do
         expect(subject.info).to eq({
-          'nickname' => 'jeff',
-          'email' => 'jeff@example.org',
-          'first_name' => 'Jeff',
-          'last_name' => 'Jefferson',
+          'nickname' => 'nickname',
+          'email' => 'name_here@example.org',
+          'first_name' => 'FirstName',
+          'last_name' => 'LastName',
           'image' => 'https://u.ph.edim.co/123/123.png'
         })
       end
@@ -112,10 +112,10 @@ describe OmniAuth::Strategies::Edmodo do
            'url' => 'https://api.edmodo.com/users/123',
            'id' => 123,
            'type' => 'teacher',
-           'username' => 'jeff',
-           'email' => 'jeff@example.org',
-           'first_name' => 'Jeff',
-           'last_name' => 'Jefferson'
+           'username' => 'name_here',
+           'email' => 'name_here@example.org',
+           'first_name' => 'FirstName',
+           'last_name' => 'LastName'
           }
         end
 

@@ -6,11 +6,11 @@ require 'omniauth-edmodo/version'
 Gem::Specification.new do |spec|
   spec.name          = "omniauth-edmodo"
   spec.version       = Omniauth::Edmodo::VERSION
-  spec.authors       = ["Jerry Luk"]
-  spec.email         = ["jerryluk@gmail.com"]
+  spec.authors       = ["Edmodo"]
+  spec.email         = ["support@edmodo.com"]
   spec.summary       = %q{OmniAuth strategy for Edmodo}
   spec.description   = %q{OmniAuth strategy for Edmodo}
-  spec.homepage      = "https://github.com/jerryluk/omniauth-edmodo"
+  spec.homepage      = "www.edmodo.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
